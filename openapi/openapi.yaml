@@ -1,0 +1,23 @@
+openapi: 3.1.0
+info:
+  title: Faculty Service
+  version: 1.0.0
+tags: []
+paths: {}
+components: {}
+servers:
+  - url: http://localhost:8080
+    description: Local
+    variables: {}
+  - url: https://faculty-api-dev-107577467292.asia-northeast1.run.app
+    description: Development
+    variables: {}
+  - url: https://faculty-api-stg-107577467292.asia-northeast1.run.app
+    description: Staging
+    variables: {}
+  - url: https://faculty-api-qa-107577467292.asia-northeast1.run.app
+    description: QA
+    variables: {}
+  - url: https://faculty-api-107577467292.asia-northeast1.run.app
+    description: Production
+    variables: {}
