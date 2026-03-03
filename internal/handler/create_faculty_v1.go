@@ -4,19 +4,19 @@ import (
 	"context"
 
 	api "github.com/fun-dotto/faculty-api/generated"
-	"github.com/fun-dotto/faculty-api/internal/domain"
+	"github.com/google/uuid"
 )
 
 func (h *FacultyHandler) FacultiesV1Create(ctx context.Context, request api.FacultiesV1CreateRequestObject) (api.FacultiesV1CreateResponseObject, error) {
-	faculty := domain.Faculty{
-		Name:  request.Body.Name,
-		Email: request.Body.Email,
-	}
+	id := uuid.New().String()
+	domainFaculty := toDomainFacultyFromRequest(id, *request.Body)
 
-	created, err := h.facultyService.Create(ctx, faculty)
+	created, err := h.facultyService.CreateFaculty(ctx, domainFaculty)
 	if err != nil {
 		return nil, err
 	}
 
-	return api.FacultiesV1Create201JSONResponse{Faculty: toApiFaculty(created)}, nil
+	return api.FacultiesV1Create201JSONResponse{
+		Faculty: toApiFaculty(created),
+	}, nil
 }
