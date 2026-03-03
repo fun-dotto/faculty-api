@@ -9,7 +9,7 @@ import (
 )
 
 func (h *FacultyHandler) FacultiesV1Detail(ctx context.Context, request api.FacultiesV1DetailRequestObject) (api.FacultiesV1DetailResponseObject, error) {
-	faculty, err := h.facultyService.GetByID(ctx, request.Id)
+	faculty, err := h.facultyService.GetFacultyByID(ctx, request.Id)
 	if err != nil {
 		if errors.Is(err, domain.ErrNotFound) {
 			return nil, err

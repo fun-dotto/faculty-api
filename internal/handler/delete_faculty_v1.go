@@ -9,7 +9,7 @@ import (
 )
 
 func (h *FacultyHandler) FacultiesV1Delete(ctx context.Context, request api.FacultiesV1DeleteRequestObject) (api.FacultiesV1DeleteResponseObject, error) {
-	err := h.facultyService.Delete(ctx, request.Id)
+	err := h.facultyService.DeleteFaculty(ctx, request.Id)
 	if err != nil {
 		if errors.Is(err, domain.ErrNotFound) {
 			return nil, err

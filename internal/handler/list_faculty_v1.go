@@ -12,7 +12,7 @@ func (h *FacultyHandler) FacultiesV1List(ctx context.Context, request api.Facult
 		ids = *request.Params.Ids
 	}
 
-	faculties, err := h.facultyService.List(ctx, ids)
+	faculties, err := h.facultyService.ListFaculties(ctx, ids)
 	if err != nil {
 		return nil, err
 	}
