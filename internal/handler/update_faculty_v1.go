@@ -9,13 +9,8 @@ import (
 )
 
 func (h *FacultyHandler) FacultiesV1Update(ctx context.Context, request api.FacultiesV1UpdateRequestObject) (api.FacultiesV1UpdateResponseObject, error) {
-	faculty := domain.Faculty{
-		ID:    request.Id,
-		Name:  request.Body.Name,
-		Email: request.Body.Email,
-	}
-
-	updated, err := h.facultyService.Update(ctx, faculty)
+	domainFaculty := toDomainFacultyFromRequest(request.Id, *request.Body)
+	updated, err := h.facultyService.UpdateFaculty(ctx, domainFaculty)
 	if err != nil {
 		if errors.Is(err, domain.ErrNotFound) {
 			return nil, err
@@ -23,5 +18,7 @@ func (h *FacultyHandler) FacultiesV1Update(ctx context.Context, request api.Facu
 		return nil, err
 	}
 
-	return api.FacultiesV1Update200JSONResponse{Faculty: toApiFaculty(updated)}, nil
+	return api.FacultiesV1Update200JSONResponse{
+		Faculty: toApiFaculty(updated),
+	}, nil
 }
