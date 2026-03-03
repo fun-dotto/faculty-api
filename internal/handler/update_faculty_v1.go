@@ -13,7 +13,7 @@ func (h *FacultyHandler) FacultiesV1Update(ctx context.Context, request api.Facu
 	updated, err := h.facultyService.UpdateFaculty(ctx, domainFaculty)
 	if err != nil {
 		if errors.Is(err, domain.ErrNotFound) {
-			return nil, err
+			return nil, err //TODO: 404追加
 		}
 		return nil, err
 	}

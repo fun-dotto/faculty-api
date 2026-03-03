@@ -39,7 +39,7 @@ func (r *facultyRepository) GetByID(ctx context.Context, id string) (domain.Facu
 	var dbFaculty database.Faculty
 	if err := r.db.WithContext(ctx).Where("id = ?", id).First(&dbFaculty).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return domain.Faculty{}, errors.New("faculty not found")
+			return domain.Faculty{}, domain.ErrNotFound
 		}
 		return domain.Faculty{}, err
 	}
@@ -64,7 +64,7 @@ func (r *facultyRepository) Update(ctx context.Context, faculty domain.Faculty) 
 		return domain.Faculty{}, result.Error
 	}
 	if result.RowsAffected == 0 {
-		return domain.Faculty{}, errors.New("faculty not found")
+		return domain.Faculty{}, domain.ErrNotFound
 	}
 	return r.GetByID(ctx, faculty.ID)
 }
@@ -75,7 +75,7 @@ func (r *facultyRepository) Delete(ctx context.Context, id string) error {
 		return result.Error
 	}
 	if result.RowsAffected == 0 {
-		return errors.New("faculty not found")
+		return domain.ErrNotFound
 	}
 	return nil
 }

@@ -12,7 +12,7 @@ func (h *FacultyHandler) FacultiesV1Delete(ctx context.Context, request api.Facu
 	err := h.facultyService.DeleteFaculty(ctx, request.Id)
 	if err != nil {
 		if errors.Is(err, domain.ErrNotFound) {
-			return nil, err
+			return nil, err //TODO: 404追加
 		}
 		return nil, err
 	}
