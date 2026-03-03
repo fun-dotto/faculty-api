@@ -22,22 +22,22 @@ func NewFacultyService(facultyRepository FacultyRepository) *FacultyService {
 	return &FacultyService{facultyRepository: facultyRepository}
 }
 
-func (s *FacultyService) List(ctx context.Context, ids []string) ([]domain.Faculty, error) {
+func (s *FacultyService) ListFaculties(ctx context.Context, ids []string) ([]domain.Faculty, error) {
 	return s.facultyRepository.List(ctx, ids)
 }
 
-func (s *FacultyService) GetByID(ctx context.Context, id string) (domain.Faculty, error) {
+func (s *FacultyService) GetFacultyByID(ctx context.Context, id string) (domain.Faculty, error) {
 	return s.facultyRepository.GetByID(ctx, id)
 }
 
-func (s *FacultyService) Create(ctx context.Context, faculty domain.Faculty) (domain.Faculty, error) {
+func (s *FacultyService) CreateFaculty(ctx context.Context, faculty domain.Faculty) (domain.Faculty, error) {
 	return s.facultyRepository.Create(ctx, faculty)
 }
 
-func (s *FacultyService) Update(ctx context.Context, faculty domain.Faculty) (domain.Faculty, error) {
+func (s *FacultyService) UpdateFaculty(ctx context.Context, faculty domain.Faculty) (domain.Faculty, error) {
 	return s.facultyRepository.Update(ctx, faculty)
 }
 
-func (s *FacultyService) Delete(ctx context.Context, id string) error {
+func (s *FacultyService) DeleteFaculty(ctx context.Context, id string) error {
 	return s.facultyRepository.Delete(ctx, id)
 }
