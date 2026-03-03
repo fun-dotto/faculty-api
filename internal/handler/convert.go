@@ -13,10 +13,10 @@ func toApiFaculty(faculty domain.Faculty) api.Faculty {
 	}
 }
 
-func toDomainFaculty(apiFaculty api.Faculty) domain.Faculty {
+func toDomainFacultyFromRequest(id string, req api.FacultyRequest) domain.Faculty {
 	return domain.Faculty{
-		ID:    apiFaculty.Id,
-		Name:  apiFaculty.Name,
-		Email: apiFaculty.Email,
+		ID:    id,
+		Name:  req.Name,
+		Email: req.Email,
 	}
 }
