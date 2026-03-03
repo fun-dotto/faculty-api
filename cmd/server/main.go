@@ -3,7 +3,11 @@ package main
 import (
 	"log"
 
+	api "github.com/fun-dotto/faculty-api/generated"
 	"github.com/fun-dotto/faculty-api/internal/database"
+	"github.com/fun-dotto/faculty-api/internal/handler"
+	"github.com/fun-dotto/faculty-api/internal/repository"
+	"github.com/fun-dotto/faculty-api/internal/service"
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -40,7 +44,12 @@ func main() {
 
 	router.Use(middleware.OapiRequestValidator(spec))
 
-	// TODO: Implement handler
+	facultyRepository := repository.NewFacultyRepository(db)
+	facultyService := service.NewFacultyService(facultyRepository)
+	h := handler.NewFacultyHandler(facultyService)
+
+	strictHandler := api.NewStrictHandler(h, nil)
+	api.RegisterHandlers(router, strictHandler)
 
 	addr := ":8080"
 	log.Printf("Server starting on %s", addr)
